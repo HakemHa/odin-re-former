@@ -1,0 +1,41 @@
+<!--
+<form accept-charset="UTF-8" action="/users" method="POST">
+    <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>"
+    >
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="user[username]">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="user[email]">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="user[password]">
+    <input type="submit" value="Submit">
+</form>
+-->
+<style>
+    form * {
+        display: block;
+        margin: 5px;
+    }
+</style>
+<%= form_with scope: :user, url: "/users", method: :post do |form| %>
+    <% if @user.errors.any? %>
+        <div>
+            <h2><%= pluralize(@user.errors.count, "error") %> ocurred:</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= form.label :username, "Username:" %>
+    <%= form.text_field :username, placeholder: "John Doe" %>
+    <%= form.label :email, "Email:" %>
+    <%= form.email_field :email, placeholder: "johndoe@gmail.com" %>
+    <%= form.label :password, "Password:" %>
+    <%= form.password_field :password, placeholder: "s3Cu5e#Pa66w0Rd" %>
+    <%= form.submit "Submit"%>
+<% end %>

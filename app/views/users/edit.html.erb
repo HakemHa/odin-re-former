@@ -1,0 +1,25 @@
+<style>
+    form * {
+        display: block;
+        margin: 5px;
+    }
+</style>
+<%= form_with scope: @user, url: user_path(@user.id), method: :put do |form| %>
+    <% if @user.errors.any? %>
+        <div>
+            <h2><%= pluralize(@user.errors.count, "error") %> ocurred:</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= form.label :username, "Username:" %>
+    <%= form.text_field :username, placeholder: "John Doe" %>
+    <%= form.label :email, "Email:" %>
+    <%= form.email_field :email, placeholder: "johndoe@gmail.com" %>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password, placeholder: "s3Cu5e#Pa66w0Rd" %>
+    <%= form.submit "Submit"%>
+<% end %>
